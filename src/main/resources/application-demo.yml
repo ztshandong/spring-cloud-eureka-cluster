@@ -1,0 +1,52 @@
+
+security:
+  user:
+    name: username
+    password: password
+---
+server:
+  port: 8013
+eureka:
+  instance:
+    hostname: eureka-primary
+    instance-id: eureka-server-1
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:8014/eureka/,http://localhost:8015/eureka/
+spring:
+  profiles: first
+---
+server:
+  port: 8014
+eureka:
+  instance:
+    hostname: eureka-primary
+    instance-id: eureka-server-1
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:8013/eureka/,http://localhost:8015/eureka/
+spring:
+  profiles: second
+---
+server:
+  port: 8015
+eureka:
+  instance:
+    hostname: eureka-primary
+    instance-id: eureka-server-1
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:8013/eureka/,http://localhost:8013/eureka/
+spring:
+  profiles: third
+
+# java -jar eurekacluster-0.0.1-SNAPSHOT.jar --spring.profiles.active=first/second/third
