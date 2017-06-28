@@ -1,9 +1,8 @@
-
+---
 security:
   user:
-    name: username
+    name: user8013
     password: password
----
 server:
   port: 8013
 eureka:
@@ -15,10 +14,14 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8014/eureka/,http://localhost:8015/eureka/
+      defaultZone: http://user8014:password@localhost:8014/eureka/,http://user8015:password@localhost:8015/eureka/
 spring:
   profiles: first
 ---
+security:
+  user:
+    name: user8014
+    password: password
 server:
   port: 8014
 eureka:
@@ -30,10 +33,14 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8013/eureka/,http://localhost:8015/eureka/
+      defaultZone: http://user8013:password@localhost:8013/eureka/,http://user8015:password@localhost:8015/eureka/
 spring:
   profiles: second
 ---
+security:
+  user:
+    name: user8015
+    password: password
 server:
   port: 8015
 eureka:
@@ -45,11 +52,8 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8013/eureka/,http://localhost:8014/eureka/
+      defaultZone: http://user8013:password@localhost:8013/eureka/,http://user8014:password@localhost:8014/eureka/
 spring:
   profiles: third
 
-# vi eureka.sh
-# java -jar target/eurekacluster-0.0.1-SNAPSHOT.jar --spring.profiles.active=first&
-# java -jar target/eurekacluster-0.0.1-SNAPSHOT.jar --spring.profiles.active=second&
-# java -jar target/eurekacluster-0.0.1-SNAPSHOT.jar --spring.profiles.active=third
+
